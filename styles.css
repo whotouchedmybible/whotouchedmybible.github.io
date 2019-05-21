@@ -8,5 +8,8 @@ article {
     width: 300px;
     padding: 20px;
     position: relative;
+}
+
+.element {
     background-image: url("/images/rip.svg");
 }
