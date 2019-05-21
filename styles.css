@@ -1,4 +1,4 @@
-/*body {
+body {
     background: #FF5733;
     padding: 20px;
 }
@@ -8,8 +8,14 @@ article {
     width: 300px;
     padding: 20px;
     position: relative;
-}*/
-
-/*.element {
-    background-image: url("/images/rip.svg");
-}*/
+}
+article::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    height: 20px;
+    width: 100%;
+    background: url("/images/rip.svg") bottom center;
+    background-size: 200%;
+}
