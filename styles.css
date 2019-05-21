@@ -16,6 +16,6 @@ article::after {
     left: 0;
     height: 20px;
     width: 100%;
-    background: url("rip.svg")
-    bottom center;
+    background: url("rip.svg") bottom center;
+    background-size: 200%;
 }
