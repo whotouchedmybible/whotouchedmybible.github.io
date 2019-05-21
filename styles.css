@@ -18,5 +18,4 @@ article::after {
     width: 100%;
     background: url("/images/rip.svg") bottom center;
     background-size: 200%;
-    background-color: white;
 }
