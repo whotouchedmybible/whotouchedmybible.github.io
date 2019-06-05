@@ -1,0 +1,58 @@
+source https://nuget.org/api/v2
+storage:none
+
+nuget FSharp.Core redirects: force
+nuget Giraffe
+nuget Giraffe.TokenRouter
+nuget Microsoft.AspNetCore.StaticFiles
+nuget Microsoft.AspNetCore
+nuget Microsoft.AspNetCore.WebSockets
+nuget Microsoft.AspNetCore.WebSockets.Server
+nuget System.Net.NetworkInformation
+nuget jose-jwt
+nuget Thoth.Json.Net prerelease
+nuget Thoth.Json.Giraffe prerelease
+
+nuget Fable.Core 
+nuget Fable.Browser.Dom 
+nuget Fable.Browser.WebStorage
+nuget Fable.Fetch
+nuget Fable.Promise
+nuget Fable.React
+nuget Fable.Elmish
+nuget Fable.Elmish.React
+nuget Fable.Elmish.Debugger
+nuget Fable.Elmish.HMR
+nuget Microsoft.Azure.WebJobs
+nuget Microsoft.Azure.WebJobs.Extensions
+nuget Thoth.Json prerelease
+
+group AzureFunctions
+  source https://nuget.org/api/v2
+  storage:none
+  nuget FSharp.Core redirects: force
+  nuget Microsoft.NET.Sdk.Functions
+  nuget Newtonsoft.Json
+  nuget WindowsAzure.Storage
+  nuget TaskBuilder.fs
+  nuget Microsoft.AspNetCore.Mvc
+
+group ServerTests
+  source https://nuget.org/api/v2
+  storage:none
+  nuget FSharp.Core redirects: force
+  nuget Expecto
+
+group UITests
+  source https://nuget.org/api/v2
+  framework >= net461
+  nuget FSharp.Core redirects: force
+  nuget Canopy 2.0.1
+  nuget Expecto
+  nuget phantomjs
+  nuget Selenium.WebDriver.ChromeDriver = 2.36
+
+group Build
+  source https://nuget.org/api/v2
+  framework >= net461
+  nuget FAKE < 5
