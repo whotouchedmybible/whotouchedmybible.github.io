@@ -3,10 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="App.fs" />
+    <Compile Include="app.fs" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Fable.Core" Version="3.0.0" />
-    <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
-  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

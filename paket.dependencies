@@ -1,0 +1,15 @@
+source https://nuget.org/api/v2
+storage:none
+
+nuget FSharp.Core
+nuget Fable.Core prerelease
+nuget Fable.Browser.Dom prerelease
+nuget Fable.Elmish.React beta
+nuget Fable.Elmish.Browser beta
+nuget Fable.Elmish.Debugger beta
+nuget Thoth.Json prerelease
+
+group Build
+    source https://nuget.org/api/v2
+    storage: true
+    nuget FAKE
