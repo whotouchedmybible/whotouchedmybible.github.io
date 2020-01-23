@@ -1,15 +1,10 @@
 source https://nuget.org/api/v2
 storage:none
+framework:netstandard2.0,netcoreapp2.0
 
-nuget FSharp.Core
-nuget Fable.Core prerelease
-nuget Fable.Browser.Dom prerelease
-nuget Fable.Elmish.React beta
-nuget Fable.Elmish.Browser beta
-nuget Fable.Elmish.Debugger beta
-nuget Thoth.Json prerelease
-
-group Build
-    source https://nuget.org/api/v2
-    storage: true
-    nuget FAKE
+nuget Fable.Core
+nuget Fable.PowerPack
+nuget Fable.React
+nuget Fable.Import.Browser
+nuget Fable.Import.Node
+nuget Fulma
