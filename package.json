@@ -16,7 +16,7 @@
     "gh-pages": "^2.0.1",
     "highlight.js": "^9.13.1",
     "live-server": "^1.2.0",
-    "marked": "^0.5.1",
+    "marked": "^0.6.1",
     "react": "^16.6.1",
     "react-dom": "^16.6.1"
   }
