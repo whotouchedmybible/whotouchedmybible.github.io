@@ -1,27 +1,35 @@
-# Testing Fable
+# Fable Minimal App
 
-This is the repository hosting samples for quite all your Fable needs. The best move to start a new Fable project is to clone this repo and then copy/paste one of the projects. There aren't so many files inside each project so that should really be easy.
+This is a simple Fable app including an [Elmish](https://elmish.github.io/) counter with as little configuration as possible. If you want to see a more complex app including commonly used F# tools like Paket or Fake, check [the Fulma demo](https://github.com/MangelMaxime/fulma-demo).
 
-So what do we have here?
+## Requirements
 
-### Easy like 1,2,3
+* [dotnet SDK](https://www.microsoft.com/net/download/core) 2.1 or higher
+* [node.js](https://nodejs.org) with [npm](https://www.npmjs.com/)
+* An F# editor like Visual Studio, Visual Studio Code with [Ionide](http://ionide.io/) or [JetBrains Rider](https://www.jetbrains.com/rider/).
 
-1. **[browser](https://github.com/fable-compiler/fable2-samples/tree/master/browser)**, a simple canvas experiment to get started with Fable and the Browser DOM Api
+## Building and running the app
 
-2. **[nodejs](https://github.com/fable-compiler/fable2-samples/tree/master/nodejs)**, a simple Node.js app with `.fs` files transpiled as independent `.js` files
+* Install JS dependencies: `npm install`
+* Start Webpack dev server: `npx webpack-dev-server` or `npm start`
+* After the first compilation is finished, in your browser open: http://localhost:8080/
 
-3. **[nodejsbundle](https://github.com/fable-compiler/fable2-samples/tree/master/nodejsbundle)**, a simple Node.js app bundled into one single `.js` file
+Any modification you do to the F# code will be reflected in the web page after saving.
 
-4. **[promises](https://github.com/fable-compiler/fable2-samples/tree/master/promises)**, do you like dogs? Display a ::dog:: pic everytime you refresh the page. Here we introduce promises and fetch to get random dog pics!
+## Project structure
 
-### Advanced
+### npm
 
-1. **[minimal](https://github.com/fable-compiler/fable2-samples/tree/master/minimal)**, a great sample featuring a React Single Page Application and Elm architecture. Great to get started with Fable for real.
+JS dependencies are declared in `package.json`, while `package-lock.json` is a lock file automatically generated.
 
-2. **[fulma](https://github.com/MangelMaxime/fulma-demo)**, full fledged Single Page Application featuring React, Bulma CSS (Fulma) and Elm architecture. The de-facto template for nowadays web apps. We've got you covered with this template.
+### Webpack
 
-3. **[mocha](https://github.com/fable-compiler/fable2-samples/tree/master/mocha)**, add tests to your Fable projects with the mocha lib! An easy to understand template with an architecture you can reproduce in already existing Fable projects.
+[Webpack](https://webpack.js.org) is a JS bundler with extensions, like a static dev server that enables hot reloading on code changes. Fable interacts with Webpack through the `fable-loader`. Configuration for Webpack is defined in the `webpack.config.js` file. Note this sample only includes basic Webpack configuration for development mode, if you want to see a more comprehensive configuration check the [Fable webpack-config-template](https://github.com/fable-compiler/webpack-config-template/blob/master/webpack.config.js).
 
-4. **[withPaket](https://github.com/fable-compiler/fable2-samples/tree/master/withpaket)**, desperate to add many .NET NuGet packages without conflicts? Let's use paket in your project!
+### F#
 
-> *Don't forget to read our lovely hand written README file located in each folder! Thanks and have fun!*
+The sample only contains two F# files: the project (.fsproj) and a source file (.fs) in the `src` folder.
+
+### Web assets
+
+The `index.html` file and other assets like an icon can be found in the `public` folder.
