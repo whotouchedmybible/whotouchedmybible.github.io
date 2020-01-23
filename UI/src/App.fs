@@ -18,7 +18,7 @@ type Msg =
 | Increment
 | Decrement
 
-let init() : Model = 0
+let init() : Model = 1
 
 // UPDATE
 
