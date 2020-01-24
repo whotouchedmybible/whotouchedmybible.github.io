@@ -1,105 +1,43 @@
 module App
 
+(**
+ The famous Increment/Decrement ported from Elm.
+ You can find more info about Elmish architecture and samples at https://elmish.github.io/
+*)
+
 open Elmish
 open Elmish.React
-open Feliz
+open Fable.React
+open Fable.React.Props
 
-type HackernewsItem = {
-  id: int
-  title: string
-  url: string
-  score : int
-}
+// MODEL
 
-type State = {
-  StoryItems: HackernewsItem list
-}
+type Model = int
 
-type Msg = Msg of unit
+type Msg =
+| Increment
+| Decrement
 
-let initialStoryItems = [
-  {
-    id = 1;
-    title = "F#: An open-source, cross-platform functional programming language for .NET"
-    url = "https://dotnet.microsoft.com/languages/fsharp"
-    score = 9000
-  };
-  {
-    id = 2;
-    title = "PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development"
-    url = "https://www.postgresql.org/"
-    score = 8650
-  }
-]
+let init() : Model = 0
 
-let init() =
-  let initialState = { StoryItems = initialStoryItems }
-  let initialCmd = Cmd.none
-  initialState, initialCmd
+// UPDATE
 
-let topStoriesEndpoint = "https://hacker-news.firebaseio.com/v0/topstories.json"
-let storyItemEndpoint (itemId: int) = sprintf "https://hacker-news.firebaseio.com/v0/item/%d.json" itemId
+let update (msg:Msg) (model:Model) =
+    match msg with
+    | Increment -> model + 1
+    | Decrement -> model - 1
 
-let update (msg: Msg) (state: State) = state, Cmd.none
+// VIEW (rendered with React)
 
-let renderError (errorMsg: string) =
-  Html.h1 [
-    prop.style [ style.color.red ]
-    prop.text errorMsg
-  ]
+let view (model:Model) dispatch =
 
-let div (classes: string list) (children: ReactElement list) =
-  Html.div [
-    prop.className classes
-    prop.children children
-  ]
+  div []
+      [ button [ OnClick (fun _ -> dispatch Increment) ] [ str "+" ]
+        div [] [ str (string model) ]
+        button [ OnClick (fun _ -> dispatch Decrement) ] [ str "-" ] ]
 
-let renderItem item =
-  Html.div [
-    prop.key item.id
-    prop.className "box"
-    prop.style [ style.marginTop 15; style.marginBottom 15 ]
-    prop.children [
-      Html.a [
-        prop.style [ style.textDecoration.underline ]
-        prop.target.blank
-        prop.href item.url
-        prop.text item.title
-      ]
-    ]
-  ]
-
-let spinner =
-  Html.div [
-    prop.style [ style.textAlign.center; style.marginTop 20 ]
-    prop.children [
-      Html.i [
-        prop.className "fa fa-cog fa-spin fa-2x"
-      ]
-    ]
-  ]
-
-let renderItems = function
-  | HasNotStartedYet -> Html.none
-  | InProgress -> spinner
-  | Resolved (Error errorMsg) -> renderError errorMsg
-  | Resolved (Ok items) -> Html.fragment [ for item in items -> renderItem item ]
-
-let render (state: State) (dispatch: Msg -> unit) =
-  Html.div [
-    prop.style [ style.padding 20 ]
-    prop.children [
-      Html.h1 [
-        prop.className "title"
-        prop.text "Elmish Hackernews"
-      ]
-
-      Html.fragment [
-        for item in state.StoryItems -> renderItem item
-      ]
-    ]
-  ]
-
-Program.mkProgram init update render
+// App
+Program.mkSimple init update view
 |> Program.withReactSynchronous "elmish-app"
+|> Program.withConsoleTrace
 |> Program.run
