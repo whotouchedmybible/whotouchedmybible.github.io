@@ -13,7 +13,7 @@ module.exports = {
     entry: "./src/App.fsproj",
     output: {
         path: path.join(__dirname, "./"),
-        filename: "bundle.js",
+        filename: isProduction ? '[name].[hash].js' : '[name].js'
     },
     devServer: {
         contentBase: "./",
