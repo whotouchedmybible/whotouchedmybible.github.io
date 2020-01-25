@@ -45,7 +45,7 @@ var CONFIG = {
     indexHtmlTemplate: './index.html',
     fsharpEntry: './src/App.fsproj',
     cssEntry: './src/style.scss',
-    outputDir: './bundle',
+    outputDir: './deploy',
     assetsDir: './',
     devServerPort: 8080,
     // When using webpack-dev-server, you may need to redirect some calls
@@ -95,7 +95,6 @@ module.exports = {
     // to prevent browser caching if code changes
     output: {
         path: resolve(CONFIG.outputDir),
-		publicPath: './',
         filename: isProduction ? '[name].[hash].js' : '[name].js'
     },
     mode: isProduction ? 'production' : 'development',
@@ -114,8 +113,9 @@ module.exports = {
     //      - HotModuleReplacementPlugin: Enables hot reloading when code changes without refreshing
     plugins: isProduction ?
         commonPlugins.concat([
-            new MiniCssExtractPlugin({ filename: 'style.[hash].css' }),
+            new MiniCssExtractPlugin({ filename: '[hash].css' }),
             new CopyWebpackPlugin([{ from: resolve(CONFIG.assetsDir) }]),
+			new CopyWebpackPlugin([{ from: './bundle.js' }])
         ])
         : commonPlugins.concat([
             new webpack.HotModuleReplacementPlugin(),
