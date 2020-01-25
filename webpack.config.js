@@ -45,7 +45,7 @@ var CONFIG = {
     indexHtmlTemplate: './index.html',
     fsharpEntry: './src/App.fsproj',
     cssEntry: './src/style.scss',
-    outputDir: './deploy',
+    outputDir: './',
     assetsDir: './',
     devServerPort: 8080,
     // When using webpack-dev-server, you may need to redirect some calls
