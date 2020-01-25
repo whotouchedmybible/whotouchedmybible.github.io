@@ -46,7 +46,7 @@ var CONFIG = {
     fsharpEntry: './src/App.fsproj',
     cssEntry: './src/style.scss',
     outputDir: './deploy',
-    assetsDir: './public',
+    assetsDir: './',
     devServerPort: 8080,
     // When using webpack-dev-server, you may need to redirect some calls
     // to a external API server. See https://webpack.js.org/configuration/dev-server/#devserver-proxy
