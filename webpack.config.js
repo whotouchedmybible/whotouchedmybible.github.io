@@ -94,7 +94,7 @@ module.exports = {
     // Add a hash to the output file name in production
     // to prevent browser caching if code changes
     output: {
-        path: resolve(CONFIG.outputDir),
+        path: path.join(__dirname, CONFIG.outputDir),
         filename: isProduction ? '[name].[hash].js' : '[name].js'
     },
     mode: isProduction ? 'production' : 'development',
