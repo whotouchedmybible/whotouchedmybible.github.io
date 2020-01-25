@@ -95,7 +95,7 @@ module.exports = {
     // to prevent browser caching if code changes
     output: {
         path: resolve(CONFIG.outputDir),
-        filename: isProduction ? '[name].[hash].js' : '[name].js'
+        filename: isProduction ? '[name].[hash].js' : 'bundle.js'
     },
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? 'source-map' : 'eval-source-map',
@@ -115,7 +115,7 @@ module.exports = {
         commonPlugins.concat([
             new MiniCssExtractPlugin({ filename: '[hash].css' }),
             new CopyWebpackPlugin([{ from: resolve(CONFIG.assetsDir) }]),
-			new CopyWebpackPlugin([{ from: './bundle.js' }])
+			new CopyWebpackPlugin([{ from: 'bundle.js' }])
         ])
         : commonPlugins.concat([
             new webpack.HotModuleReplacementPlugin(),
