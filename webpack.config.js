@@ -49,7 +49,7 @@ var CONFIG = {
 		"./node_modules/bulma/css/bulma.css",
 		"./src/style.scss"
 	],
-    outputDir: "./",
+    outputDir: "./deploy",
     assetsDir: "./dev",
     devServerPort: 8080,
     // When using webpack-dev-server, you may need to redirect some calls
@@ -122,7 +122,7 @@ module.exports = {
     // Besides the HtmlPlugin, we use the following plugins:
     // PRODUCTION
     //      - MiniCssExtractPlugin: Extracts CSS from bundle to a different file
-    //          To minify CSS, see https://github.com/webpack-contrib/mini-css-extract-plugin#minimizing-for-production    
+    //          To minify CSS, see https://github.com/webpack-contrib/mini-css-extract-plugin#minimizing-for-production
     //      - CopyWebpackPlugin: Copies static assets to output directory
     // DEVELOPMENT
     //      - HotModuleReplacementPlugin: Enables hot reloading when code changes without refreshing
