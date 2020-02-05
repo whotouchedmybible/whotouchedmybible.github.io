@@ -15510,9 +15510,9 @@ function App_update(msg, model) {
 function App_view(model$$1, dispatch) {
   var props, children, props$$2, children$$2, s$$1, props$$4, children$$4;
   var props$$6 = [];
-  var children$$6 = [(props = [new DOMAttr(40, "OnClick", function (_arg1) {
+  var children$$6 = [(props = [new HTMLAttr(25, "className", "button is-primary"), new DOMAttr(40, "OnClick", function (_arg1) {
     dispatch(new Msg(0, "Increment"));
-  })], (children = ["+"], react["createElement"].apply(react, ["button", createObj(props, 1)].concat(App_toConsumableArray(children))))), (props$$2 = [], (children$$2 = [(s$$1 = int32ToString(model$$1), s$$1)], react["createElement"].apply(react, ["div", createObj(props$$2, 1)].concat(App_toConsumableArray(children$$2))))), (props$$4 = [new DOMAttr(40, "OnClick", function (_arg2) {
+  })], (children = ["+"], react["createElement"].apply(react, ["button", createObj(props, 1)].concat(App_toConsumableArray(children))))), (props$$2 = [], (children$$2 = [(s$$1 = int32ToString(model$$1), s$$1)], react["createElement"].apply(react, ["div", createObj(props$$2, 1)].concat(App_toConsumableArray(children$$2))))), (props$$4 = [new HTMLAttr(25, "className", "button is-danger"), new DOMAttr(40, "OnClick", function (_arg2) {
     dispatch(new Msg(1, "Decrement"));
   })], (children$$4 = ["-"], react["createElement"].apply(react, ["button", createObj(props$$4, 1)].concat(App_toConsumableArray(children$$4)))))];
   return react["createElement"].apply(react, ["div", createObj(props$$6, 1)].concat(children$$6));
@@ -15539,4 +15539,4 @@ function App_view(model$$1, dispatch) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.a6873f7789eab54f3226.js.map
+//# sourceMappingURL=app.7cbb6a6013f1bacf118d.js.map

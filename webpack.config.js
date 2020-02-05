@@ -49,7 +49,7 @@ var CONFIG = {
 		"./node_modules/bulma/css/bulma.css",
 		"./src/style.scss"
 	],
-    outputDir: "./deploy",
+    outputDir: "./",
     assetsDir: "./dev",
     devServerPort: 8080,
     // When using webpack-dev-server, you may need to redirect some calls
@@ -130,7 +130,7 @@ module.exports = {
         commonPlugins.concat([
             new MiniCssExtractPlugin({ filename: '[hash].css' }),
             new CopyWebpackPlugin([{ from: resolve(CONFIG.assetsDir) }]),
-			//new CopyWebpackPlugin([{ from: './deploy/bundle.js' }])
+			new CopyWebpackPlugin([{ from: './deploy/bundle.js' }])
         ])
         : commonPlugins.concat([
             new webpack.HotModuleReplacementPlugin(),
