@@ -32,9 +32,9 @@ let update (msg:Msg) (model:Model) =
 let view (model:Model) dispatch =
 
   div []
-      [ button [ OnClick (fun _ -> dispatch Increment) ] [ str "+" ]
+      [ button [ Class "button is-primary"; OnClick (fun _ -> dispatch Increment) ] [ str "+" ]
         div [] [ str (string model) ]
-        button [ OnClick (fun _ -> dispatch Decrement) ] [ str "-" ] ]
+        button [ Class "button is-danger"; OnClick (fun _ -> dispatch Decrement) ] [ str "-" ] ]
 
 // App
 Program.mkSimple init update view

@@ -33,20 +33,24 @@
 
 // Dependencies. Also required: core-js, fable-loader, fable-compiler, @babel/core,
 // @babel/preset-env, babel-loader, sass, sass-loader, css-loader, style-loader, file-loader, resolve-url-loader
-var path = require('path');
-var webpack = require('webpack');
+var path = require("path");
+var webpack = require("webpack");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 var CONFIG = {
     // The tags to include the generated JS and CSS will be automatically injected in the HTML template
     // See https://github.com/jantimon/html-webpack-plugin
-    indexHtmlTemplate: './index.html',
-    fsharpEntry: './src/App.fsproj',
-    cssEntry: './src/style.scss',
-    outputDir: './',
-    assetsDir: './dev',
+    indexHtmlTemplate: "./index.html",
+    fsharpEntry: "./src/App.fsproj",
+    cssEntry: [
+		"./node_modules/bulma/css/bulma.css",
+		"./src/style.scss"
+	],
+    outputDir: "./deploy",
+    assetsDir: "./dev",
     devServerPort: 8080,
     // When using webpack-dev-server, you may need to redirect some calls
     // to a external API server. See https://webpack.js.org/configuration/dev-server/#devserver-proxy
@@ -55,12 +59,12 @@ var CONFIG = {
     // More info at https://babeljs.io/docs/en/next/babel-preset-env.html
     babel: {
         presets: [
-            ['@babel/preset-env', {
+            ["@babel/preset-env", {
                 modules: false,
                 // This adds polyfills when needed. Requires core-js dependency.
                 // See https://babeljs.io/docs/en/babel-preset-env#usebuiltins
                 // Note that you still need to add custom polyfills if necessary (e.g. whatwg-fetch)
-                useBuiltIns: 'usage',
+                useBuiltIns: "usage",
                 corejs: 3
             }]
         ],
@@ -69,7 +73,7 @@ var CONFIG = {
 
 // If we're running the webpack-dev-server, assume we're in development mode
 var isProduction = !process.argv.find(v => v.indexOf('webpack-dev-server') !== -1);
-console.log('Bundling for ' + (isProduction ? 'production' : 'development') + '...');
+console.log("Bundling for " + (isProduction ? "production" : "development") + "...");
 
 // The HtmlWebpackPlugin allows us to use a template for the index.html page
 // and automatically injects <script> or <link> tags for generated bundles.
@@ -86,10 +90,10 @@ module.exports = {
     // with the code because the MiniCssExtractPlugin will extract the
     // CSS in a separate files.
     entry: isProduction ? {
-        app: [resolve(CONFIG.fsharpEntry), resolve(CONFIG.cssEntry)]
+        app: [resolve(CONFIG.fsharpEntry), ...CONFIG.cssEntry]
     } : {
             app: [resolve(CONFIG.fsharpEntry)],
-            style: [resolve(CONFIG.cssEntry)]
+            style: CONFIG.cssEntry
         },
     // Add a hash to the output file name in production
     // to prevent browser caching if code changes
@@ -97,12 +101,23 @@ module.exports = {
         path: resolve(CONFIG.outputDir),
         filename: isProduction ? '[name].[hash].js' : '[name].js'
     },
-    mode: isProduction ? 'production' : 'development',
-    devtool: isProduction ? 'source-map' : 'eval-source-map',
+    mode: isProduction ? "production" : "development",
+    devtool: isProduction ? "source-map" : "eval-source-map",
     optimization: {
         splitChunks: {
-            chunks: 'all'
+            cacheGroups: {
+                commons: {
+                    test: /node_modules/,
+                    name: "vendors",
+                    chunks: "all"
+                }
+            }
         },
+        minimizer:
+            isProduction ? [
+                new OptimizeCSSAssetsPlugin({})
+            ]
+            : []
     },
     // Besides the HtmlPlugin, we use the following plugins:
     // PRODUCTION
@@ -115,7 +130,7 @@ module.exports = {
         commonPlugins.concat([
             new MiniCssExtractPlugin({ filename: '[hash].css' }),
             new CopyWebpackPlugin([{ from: resolve(CONFIG.assetsDir) }]),
-			new CopyWebpackPlugin([{ from: './deploy/bundle.js' }])
+			//new CopyWebpackPlugin([{ from: './deploy/bundle.js' }])
         ])
         : commonPlugins.concat([
             new webpack.HotModuleReplacementPlugin(),
@@ -126,7 +141,7 @@ module.exports = {
     },
     // Configuration for webpack-dev-server
     devServer: {
-        publicPath: '/',
+        publicPath: "/",
         contentBase: resolve(CONFIG.assetsDir),
         host: '0.0.0.0',
         port: CONFIG.devServerPort,
@@ -143,7 +158,7 @@ module.exports = {
             {
                 test: /\.fs(x|proj)?$/,
                 use: {
-                    loader: 'fable-loader',
+                    loader: "fable-loader",
                     options: {
                         babel: CONFIG.babel
                     }
@@ -175,7 +190,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?.*)?$/,
-                use: ['file-loader']
+                use: ["file-loader"]
             }
         ]
     }
