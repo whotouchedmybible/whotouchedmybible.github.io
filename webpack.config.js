@@ -46,7 +46,8 @@ var CONFIG = {
     indexHtmlTemplate: "./index.html",
     fsharpEntry: "./src/App.fsproj",
     cssEntry: [
-		"./node_modules/bulma/css/bulma.css",
+        "./node_modules/bulma/css/bulma.css",
+        "./node_modules/@fortawesome/fontawesome-free/css/all.css",
 		"./src/style.scss"
 	],
     outputDir: "./",
