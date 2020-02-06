@@ -33,23 +33,34 @@ let view (model:Model) dispatch =
     div [ Class "container" ] [
         div [ Class "container is-fluid" ] [
             nav [ Class "navbar"; Role "navigation" ] [
-                div [] [
-                    a [] [
+                div [ Class "navbar-brand" ] [
+                    a [ Class "navbar-item" ] [
                         p [ Class "subtitle is-5"] [
                             strong [] [ str "WTMB" ]
                         ]
                     ]
-                ]
-                div [ Class "navbar-menu" ] [
-                    div [ Class "navbar-start" ] [
-                        div [ Class "navbar-item has-dropdown is-hoverable" ] [
+                    div [ Class "navbar-item has-dropdown is-hoverable" ] [
                             a [ Class "navbar-link" ] [ str "lenses" ]
                             div [ Class "navbar-dropdown" ] [
                                 a [ Class "navbar-item"; OnClick (fun _-> dispatch CrossReferences) ] [ str "Cross References" ]
                             ]
                         ]
+                    a [ Class "navbar-burger burger" ] [
+                        span [] []
+                        span [] []
+                        span [] []
                     ]
                 ]
+                //div [ Class "navbar-menu" ] [
+                //    div [ Class "navbar-start" ] [
+                //        div [ Class "navbar-item has-dropdown is-hoverable" ] [
+                //            a [ Class "navbar-link" ] [ str "lenses" ]
+                //            div [ Class "navbar-dropdown" ] [
+                //                a [ Class "navbar-item"; OnClick (fun _-> dispatch CrossReferences) ] [ str "Cross References" ]
+                //            ]
+                //        ]
+                //    ]
+                //]
             ]
         ]
         div [ Class "container is-fluid" ] [
