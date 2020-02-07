@@ -39,7 +39,7 @@ let init() : Model =
 let update (msg:Msg) (model:Model) =
     match msg with
     | NightTog bool ->
-        {model with NightMode = bool}
+        {model with NightMode = bool; MenuTog = false}
     | MenuToggle bool ->
         {model with MenuTog = bool}
     | CloseLenses ->
@@ -148,44 +148,58 @@ let view (model:Model) dispatch =
                                 p [ Class "" ] [
                                     span [ Class "content is-small has-text-grey-light"] [ str "14" ]
                                     str "And God said, Let there bee lights in the firmament of the heauen, to diuide the day from the night: and let them be for signes and for seasons, and for dayes and yeeres. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "15" ]
                                     str "And let them be for lights in the firmament of the heauen, to giue light vpon the earth: and it was so. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "16" ]
                                     str "And God made two great lights: the greater light to rule the day, and the lesser light to rule the night: he made the starres also. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "17" ]
                                     str "And God set them in the firmament of the heauen, to giue light vpon the earth: "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "18" ]
                                     str "And to rule ouer the day, and ouer the night, and to diuide the light from the darkenesse: and God saw that it was good. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "19" ]
                                     str "And the euening and the morning were the fourth day. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "20" ]
                                     str "And God said, Let the waters bring foorth aboundantly the mouing creature that hath life, and foule that may flie aboue the earth in the open firmament of heauen. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "21" ]
                                     str "And God created great whales, and euery liuing creature that moueth, which the waters brought forth aboundantly after their kinde, and euery winged foule after his kinde: and God saw that it was good. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "22" ]
                                     str "And God blessed them, saying, Be fruitfull, and multiply, and fill the waters in the Seas, and let foule multiply in the earth. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "23" ]
                                     str "And the euening and the morning were the fift day. "
                                 ]
                                 p [ Class "" ] [
                                     span [ Class "content is-small has-text-grey-light"] [ str "24" ]
                                     str "And God said, Let the earth bring forth the liuing creature after his kinde, cattell, and creeping thing, and beast of the earth after his kinde: and it was so. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "25" ]
                                     str "And God made the beast of the earth after his kinde, and cattell after their kinde, and euery thing that creepeth vpon the earth, after his kinde: and God saw that it was good. "
                                 ]
                                 p [ Class "" ] [
                                     span [ Class "content is-small has-text-grey-light"] [ str "26" ]
                                     str "And God said, Let vs make man in our Image, after our likenesse: and let them haue dominion ouer the fish of the sea, and ouer the foule of the aire, and ouer the cattell, and ouer all the earth, and ouer euery creeping thing that creepeth vpon the earth. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "27" ]
                                     str "So God created man in his owne Image, in the Image of God created hee him; male and female created hee them. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "28" ]
                                     str "And God blessed them, and God said vnto them, Be fruitfull, and multiply, and replenish the earth, and subdue it, and haue dominion ouer the fish of the sea, and ouer the foule of the aire, and ouer euery liuing thing that mooueth vpon the earth. "
                                 ]
-                                p [ Class "indent" ] [
+                                p [ Class "" ] [
                                     span [ Class "content is-small has-text-grey-light"] [ str "29" ]
                                     str "And God said, Behold, I haue giuen you euery herbe bearing seede, which is vpon the face of all the earth, and euery tree, in the which is the fruit of a tree yeelding seed, to you it shall be for meat: "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "30" ]
                                     str "And to euery beast of the earth, and to euery foule of the aire, and to euery thing that creepeth vpon the earth, wherein there is life, I haue giuen euery greene herbe for meat: and it was so. "
+                                    br []
                                     span [ Class "content is-small has-text-grey-light"] [ str "31" ]
                                     str "And God saw euery thing that hee had made: and behold, it was very good. And the euening and the morning were the sixth day."
                                 ]
