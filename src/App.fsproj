@@ -12,6 +12,7 @@
 	  <None Include="style" />
 	  <None Include="style.scss" />
 	  <Compile Include="Translations\KJV1611\Genesis.fs" />
+	  <Compile Include="Translations\KJV\Genesis.fs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="obj\App.fsproj.nuget.dgspec.json" />

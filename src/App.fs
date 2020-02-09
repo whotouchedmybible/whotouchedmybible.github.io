@@ -5,7 +5,6 @@ open Elmish.React
 open Fable.React
 open Fable.React.Props
 open Translations
-open Translations.KJV1611
 
 type HTMLAttr =
      | [<CompiledName("data-target")>] DataTarget of string
@@ -47,6 +46,8 @@ let update (msg:Msg) (model:Model) =
         {model with LensOpt = None}
     | Lens lens ->
         {model with MenuTog = false; LensOpt = Some lens}
+    | ChangeTranslation translation ->
+        {model with Translation = translation}
     | NextChapter ->
         model
     | PreviousChapter ->
@@ -76,6 +77,26 @@ let view (model:Model) dispatch =
                         div [ Class "navbar-item has-dropdown is-hoverable" ] [
                             a [ Class "navbar-link" ] [
                                 span [ Class "icon"] [
+                                    i [ Class "fas fa-book" ] []
+                                ]
+                                span [] [ str "Translations" ]
+                            ]
+                            div [ Class "navbar-dropdown" ] [
+                                a [ Class "navbar-item"; OnClick (fun _-> dispatch (ChangeTranslation KJV1611)) ] [
+                                    span [] [
+                                        str "KJV 1611"
+                                    ]
+                                ]
+                                a [ Class "navbar-item"; OnClick (fun _-> dispatch (ChangeTranslation KJV)) ] [
+                                    span [] [
+                                        str "KJV"
+                                    ]
+                                ]
+                            ]
+                        ]
+                        div [ Class "navbar-item has-dropdown is-hoverable" ] [
+                            a [ Class "navbar-link" ] [
+                                span [ Class "icon"] [
                                     i [ Class "fas fa-microscope" ] []
                                 ]
                                 span [] [ str "Lenses" ]
@@ -92,10 +113,17 @@ let view (model:Model) dispatch =
                             ]
                         ]
                         a [ Class "navbar-item"; OnClick (fun _-> dispatch (NightTog (boolOpposite model.NightMode))) ] [
-                            span [ Class "icon"] [
-                                i [ Class "fas fa-moon" ] []
-                            ]
-                            span [] [ str "Night Mode" ]
+                            match model.NightMode with
+                            | true ->
+                                span [ Class "icon"] [
+                                    i [ Class "fas fa-sun" ] []
+                                ]
+                                span [] [ str "Day Mode" ]
+                            | false ->
+                                span [ Class "icon"] [
+                                    i [ Class "fas fa-moon" ] []
+                                ]
+                                span [] [ str "Night Mode" ]
                         ]
                     ]
                 ]
@@ -107,7 +135,12 @@ let view (model:Model) dispatch =
                 div [ Class "container is-fluid" ] [
                     div [ Class "tile is-ancestor" ] [
                         div [ Class ( "tile is-vertical " + if model.LensOpt = None then "is-12" else "is-6") ] [
-                            div [ Class "content is-medium"] Genesis.gen1
+                            div [ Class "content is-medium"]
+                                (match model.Translation with
+                                    | KJV1611 -> KJV1611.Genesis.gen1
+                                    | KJV -> KJV.Genesis.gen1
+                                    | _ -> []
+                                )
                             div [ Class "icon is-small has-text-grey-light"] [
                                 str "Next Chapter"
                                 i [ Class "fas fa-chevron-right" ] []

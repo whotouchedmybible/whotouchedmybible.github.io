@@ -6,5 +6,6 @@ type Msg =
     | MenuToggle of bool
     | CloseLenses
     | Lens of Lenses
+    | ChangeTranslation of Translation
     | NextChapter
     | PreviousChapter
