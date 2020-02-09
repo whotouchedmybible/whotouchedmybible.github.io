@@ -1,4 +1,4 @@
-module Translations.KJV1611
+module Translations.KJV1611.Genesis
 
 open Elmish
 open Elmish.React
@@ -7,6 +7,7 @@ open Fable.React.Props
 
 let gen1 =
     [
+        h1 [] [ str "Genesis 1" ]
         p [ Class "" ] [
             span [ Class "content is-small has-text-grey-light"] [ str "1" ]
             str "In the beginning God created the Heauen, and the Earth. "
@@ -106,5 +107,89 @@ let gen1 =
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "31" ]
             str "And God saw euery thing that hee had made: and behold, it was very good. And the euening and the morning were the sixth day."
+        ]
+    ]
+
+let gen2 =
+    [
+        h1 [] [ str "Genesis 2" ]
+        p [ Class "" ] [
+            span [ Class "content is-small has-text-grey-light"] [ str "1" ]
+            str "Thus the heauens and the earth were finished, and all the hoste of them. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "2" ]
+            str " And on the seuenth day God ended his worke, which hee had made: And he rested on the seuenth day from all his worke, which he had made."
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "3" ]
+            str "And God blessed the seuenth day, and sanctified it: because that in it he had rested from all his worke, which God created and made. "
+        ]
+        p [ Class "" ] [
+            span [ Class "content is-small has-text-grey-light"] [ str "4" ]
+            str "These are the generations of the heauens, & of the earth, when they were created; in the day that the LORD God made the earth, and the heauens, "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "5" ]
+            str "And euery plant of the field, before it was in the earth, and euery herbe of the field, before it grew: for the LORD God had not caused it to raine vpon the earth, and there was not a man to till the ground. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "6" ]
+            str "But there went vp a mist from the earth, and watered the whole face of the ground. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "7" ]
+            str "And the LORD God formed man of the dust of the ground, & breathed into his nostrils the breath of life; and man became a liuing soule. "
+        ]
+        p [ Class "" ] [
+            span [ Class "content is-small has-text-grey-light"] [ str "8" ]
+            str "And the LORD God planted a garden Eastward in Eden; and there he put the man whom he had formed. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "9" ]
+            str "And out of the ground made the LORD God to grow euery tree that is pleasant to the sight, and good for food: the tree of life also in the midst of the garden, and the tree of knowledge of good and euill. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "10" ]
+            str "And a riuer went out of Eden to water the garden, and from thence it was parted, and became into foure heads. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "11" ]
+            str "The name of the first is Pison: that is it which compasseth the whole land of Hauilah, where there is gold. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "12" ]
+            str "And the gold of that land is good: There is Bdellium and the Onix stone. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "13" ]
+            str "And the name of the second riuer is Gihon: the same is it that compasseth the whole land of Ethiopia. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "14" ]
+            str "And the name of the third riuer is Hiddekel: that is it which goeth toward the East of Assyria: and the fourth riuer is Euphrates. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "15" ]
+            str "And the LORD God tooke the man, and put him into the garden of Eden, to dresse it, and to keepe it. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "16" ]
+            str "And the LORD God commanded the man, saying, Of euery tree of the garden thou mayest freely eate. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "17" ]
+            str "But of the tree of the knowledge of good and euill, thou shalt not eate of it: for in the day that thou eatest thereof, thou shalt surely die. "
+        ]
+        p [ Class "" ] [
+            span [ Class "content is-small has-text-grey-light"] [ str "18" ]
+            str "And the LORD God said, It is not good that the man should be alone: I will make him an helpe meet for him. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "19" ]
+            str "And out of þe ground the LORD God formed euery beast of the field, and euery foule of the aire, and brought them vnto Adam, to see what he would call them: and whatsoeuer Adam called euery liuing creature, that was the name thereof. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "20" ]
+            str "And Adam gaue names to all cattell, and to the foule of the aire, and to euery beast of the fielde: but for Adam there was not found an helpe meete for him. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "21" ]
+            str "And the LORD God caused a deepe sleepe to fall vpon Adam, and hee slept; and he tooke one of his ribs, and closed vp the flesh in stead thereof. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "22" ]
+            str "And the rib which the LORD God had taken from man, made hee a woman, & brought her vnto the man. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "23" ]
+            str "And Adam said, This is now bone of my bones, and flesh of my flesh: she shalbe called woman, because shee was taken out of man. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "24" ]
+            str "Therefore shall a man leaue his father and his mother, and shall cleaue vnto his wife: and they shalbe one flesh. "
+            br []
+            span [ Class "content is-small has-text-grey-light"] [ str "25" ]
+            str "And they were both naked, the man & his wife, and were not ashamed. "
         ]
     ]

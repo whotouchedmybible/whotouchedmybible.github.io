@@ -5,6 +5,33 @@
   <ItemGroup>
     <PackageReference Include="Fable.Core" Version="3.0.0" />
     <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
-	  <Compile Include="App.fs" />
+	  <Compile Include="obj\Debug\netcoreapp3.1\App.AssemblyInfo.fs" />
+	  <Compile Include="obj\Debug\netstandard2.0\App.AssemblyInfo.fs" />
+	  <Compile Include="Types.fs" />
+	  <Compile Include="Msgs.fs" />
+	  <None Include="style" />
+	  <None Include="style.scss" />
+	  <Compile Include="Translations\KJV1611\Genesis.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="obj\App.fsproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\netcoreapp3.1\" />
+    <Folder Include="bin\Debug\netstandard2.0\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\App.fsproj.nuget.cache" />
+    <None Include="obj\App.fsproj.nuget.g.props" />
+    <None Include="obj\App.fsproj.nuget.g.targets" />
+    <None Include="obj\Debug\netcoreapp3.1\App.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\App.assets.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\App.fsproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\App.fsprojAssemblyReference.cache" />
+    <None Include="obj\Debug\netstandard2.0\App.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netstandard2.0\App.assets.cache" />
+    <None Include="obj\Debug\netstandard2.0\App.fsprojAssemblyReference.cache" />
+    <Compile Include="App.fs" />
   </ItemGroup>
 </Project>
