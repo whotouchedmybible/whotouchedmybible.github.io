@@ -6,26 +6,15 @@ open Fable.React
 open Fable.React.Props
 open Translations
 
-type HTMLAttr =
-     | [<CompiledName("data-target")>] DataTarget of string
-     | [<CompiledName("aria-label")>] AriaLabel of string
-     | [<CompiledName("aria-expanded")>] AriaExpanded of string
-     | [<CompiledName("aria-hidden")>] AriaHidden of string
-     interface IHTMLProp
-
-type Address =
-    {
-        Book: Book
-        Chapter: int
-        Verses: int list
-    }
-
 type Model =
     {
         NightMode: bool
         MenuTog: bool
         LensOpt: Lenses option
         Translation: Translation
+        Book: Book
+        Chapter: int
+        Verses: int list
     }
 
 let init() : Model =
@@ -34,6 +23,9 @@ let init() : Model =
         MenuTog = false
         LensOpt = None
         Translation = KJV1611
+        Book = Genesis
+        Chapter = 1
+        Verses = []
     }
 
 let update (msg:Msg) (model:Model) =
@@ -48,11 +40,148 @@ let update (msg:Msg) (model:Model) =
         {model with MenuTog = false; LensOpt = Some lens}
     | ChangeTranslation translation ->
         {model with Translation = translation}
+    | ChangeBook book ->
+        {model with Book = book}
+    | ChangeChapter chapter ->
+        {model with Chapter = chapter}
     | NextChapter ->
         model
     | PreviousChapter ->
         model
 
+let addressMenu model dispatch =
+    div [] [
+        span [ Class "hide-mobile" ] [
+            span [ Class "columns is-gapless" ] [
+                span [ Class "column" ] [
+                    div [ Class "dropdown is-hoverable" ] [
+                        div [ Class "dropdown-trigger" ] [
+                            div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
+                                span [] [
+                                    span [ Class "title is-1" ] [ str (sprintf "%A" model.Book) ]
+                                    span [ Class "icon has-text-grey-light" ] [
+                                        i [ Class "fas fa-angle-down"; AriaHidden "true" ] []
+                                    ]
+                                ]
+                            ]
+                        ]
+                        div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
+                            div [ Class "dropdown-content" ] [
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook Genesis)) ] [ str "Genesis" ]
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook Exodus)) ] [ str "Exodus" ]
+                            ]
+                        ]
+                    ]
+                ]
+                span [ Class "column has-text-centered has-text-bottom" ] [
+                    div [ Class "dropdown is-hoverable" ] [
+                        div [ Class "dropdown-trigger" ] [
+                            div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
+                                span [] [
+                                    span [ Class "title is-3" ] [ str (sprintf "Chapter %i" model.Chapter) ]
+                                    span [ Class "icon has-text-grey-light" ] [
+                                        i [ Class "fas fa-angle-down"; AriaHidden "true" ] []
+                                    ]
+                                ]
+                            ]
+                        ]
+                        div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
+                            div [ Class "dropdown-content" ] [
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter 1)) ] [ str "1" ]
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter 2)) ] [ str "2" ]
+                            ]
+                        ]
+                    ]
+                ]
+                span [ Class "column has-text-right has-text-bottom" ] [
+                    div [ Class "dropdown is-hoverable" ] [
+                        div [ Class "dropdown-trigger" ] [
+                            div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
+                                span [] [
+                                    span [ Class "title is-6" ] [ str "verses [all]" ]
+                                    span [ Class "icon has-text-grey-light" ] [
+                                        i [ Class "fas fa-angle-down"; AriaHidden "true" ] []
+                                    ]
+                                ]
+                            ]
+                        ]
+                        div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
+                            div [ Class "dropdown-content" ] [
+                                a [ Class "dropdown-item" ] [ str "1" ]
+                                a [ Class "dropdown-item" ] [ str "2" ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+        span [ Class "show-mobile" ] [
+            div [ Class "columns" ] [
+                div [ Class "column" ] [
+                    div [ Class "dropdown is-hoverable" ] [
+                        div [ Class "dropdown-trigger" ] [
+                            div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
+                                span [] [
+                                    span [ Class "title is-1" ] [ str (sprintf "%A" model.Book) ]
+                                    span [ Class "icon has-text-grey-light" ] [
+                                        i [ Class "fas fa-angle-down"; AriaHidden "true" ] []
+                                    ]
+                                ]
+                            ]
+                        ]
+                        div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
+                            div [ Class "dropdown-content" ] [
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook Genesis)) ] [ str "Genesis" ]
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook Exodus)) ] [ str "Exodus" ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+            div [ Class "columns is-mobile is-gapless" ] [
+                div [ Class "column has-text-bottom" ] [
+                    div [ Class "dropdown is-hoverable" ] [
+                        div [ Class "dropdown-trigger" ] [
+                            div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
+                                span [] [
+                                    span [ Class "title is-3" ] [ str (sprintf "%i" model.Chapter) ]
+                                    span [ Class "icon has-text-grey-light" ] [
+                                        i [ Class "fas fa-angle-down"; AriaHidden "true" ] []
+                                    ]
+                                ]
+                            ]
+                        ]
+                        div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
+                            div [ Class "dropdown-content" ] [
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter 1)) ] [ str "1" ]
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter 2)) ] [ str "2" ]
+                            ]
+                        ]
+                    ]
+                ]
+                div [ Class "column has-text-bottom" ] [
+                    div [ Class "dropdown is-hoverable" ] [
+                        div [ Class "dropdown-trigger" ] [
+                            div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
+                                span [] [
+                                    span [ Class "title is-6" ] [ str "verses [all]" ]
+                                    span [ Class "icon has-text-grey-light" ] [
+                                        i [ Class "fas fa-angle-down"; AriaHidden "true" ] []
+                                    ]
+                                ]
+                            ]
+                        ]
+                        div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
+                            div [ Class "dropdown-content" ] [
+                                a [ Class "dropdown-item" ] [ str "1" ]
+                                a [ Class "dropdown-item" ] [ str "2" ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
 
 let view (model:Model) dispatch =
     let boolOpposite bool =
@@ -66,14 +195,14 @@ let view (model:Model) dispatch =
                     a [ Class "navbar-item" ] [
                         img [ Src "WTMBLogo.png" ]
                     ]
-                    a [ Role "button"; Class ("navbar-burger burger " + if model.MenuTog = true then "is-active" else ""); AriaLabel "menu"; AriaExpanded "false"; DataTarget "navbarMain"; OnClick (fun _-> dispatch (MenuToggle (boolOpposite model.MenuTog))) ] [
+                    a [ Role "button"; Class ("navbar-burger burger " + if model.MenuTog = true then "is-active" else ""); AriaLabel "menu"; AriaExpanded false; DataTarget "navbarMain"; OnClick (fun _-> dispatch (MenuToggle (boolOpposite model.MenuTog))) ] [
                         span [ AriaHidden "true" ] []
                         span [ AriaHidden "true" ] []
                         span [ AriaHidden "true" ] []
                     ]
                 ]
                 div [ Id "navbarMain"; Class ("navbar-menu " + if model.MenuTog = true then "is-active" else "") ] [
-                    div [ Class "navbar-start" ] [
+                    div [ Class "navbar-end" ] [
                         div [ Class "navbar-item has-dropdown is-hoverable" ] [
                             a [ Class "navbar-link" ] [
                                 span [ Class "icon"] [
@@ -132,15 +261,16 @@ let view (model:Model) dispatch =
         div [ Class ("container is-fluid" + if model.NightMode = true then " nightMode" else "") ] [br []]
         div [ Class ("container is-fluid" + if model.NightMode = true then " nightMode" else "") ] [
             div [ Class "container" ] [
-                div [ Class "container is-fluid" ] [
+                div [ Class "" ] [
                     div [ Class "tile is-ancestor" ] [
                         div [ Class ( "tile is-vertical " + if model.LensOpt = None then "is-12" else "is-6") ] [
-                            div [ Class "content is-medium"]
+                            div [ Class "content is-medium"] [
+                                addressMenu model dispatch
                                 (match model.Translation with
-                                    | KJV1611 -> KJV1611.Genesis.gen1
-                                    | KJV -> KJV.Genesis.gen1
-                                    | _ -> []
+                                    | KJV1611 -> KJV1611.TableOfContents.books model.Book model.Chapter
+                                    | KJV -> KJV.TableOfContents.books model.Book model.Chapter
                                 )
+                            ]
                             div [ Class "icon is-small has-text-grey-light"] [
                                 str "Next Chapter"
                                 i [ Class "fas fa-chevron-right" ] []

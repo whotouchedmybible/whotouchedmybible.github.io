@@ -1,13 +1,10 @@
 module Translations.KJV1611.Genesis
 
-open Elmish
-open Elmish.React
 open Fable.React
 open Fable.React.Props
 
 let gen1 =
-    [
-        h1 [] [ str "Genesis 1" ]
+    div [] [
         p [ Class "" ] [
             span [ Class "content is-small has-text-grey-light"] [ str "1" ]
             str "In the beginning God created the Heauen, and the Earth. "
@@ -111,14 +108,13 @@ let gen1 =
     ]
 
 let gen2 =
-    [
-        h1 [] [ str "Genesis 2" ]
+    div [] [
         p [ Class "" ] [
             span [ Class "content is-small has-text-grey-light"] [ str "1" ]
             str "Thus the heauens and the earth were finished, and all the hoste of them. "
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "2" ]
-            str " And on the seuenth day God ended his worke, which hee had made: And he rested on the seuenth day from all his worke, which he had made."
+            str "And on the seuenth day God ended his worke, which hee had made: And he rested on the seuenth day from all his worke, which he had made."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "3" ]
             str "And God blessed the seuenth day, and sanctified it: because that in it he had rested from all his worke, which God created and made. "
@@ -192,4 +188,12 @@ let gen2 =
             span [ Class "content is-small has-text-grey-light"] [ str "25" ]
             str "And they were both naked, the man & his wife, and were not ashamed. "
         ]
+    ]
+
+let genesis chapter =
+    div [] [
+        match chapter with
+        | 1 -> gen1
+        | 2 -> gen2
+        | _ -> div [] []
     ]

@@ -11,3 +11,13 @@
     background-color: #00c5a8;
     color: #fff;
 }
+
+@media only screen and (max-device-width: 768px) {
+    .show-mobile {display: block;}
+    .hide-mobile {display: none;}
+}
+
+@media only screen and (min-device-width: 769px) {
+    .show-mobile {display: none;}
+    .hide-mobile {display: block;}
+}

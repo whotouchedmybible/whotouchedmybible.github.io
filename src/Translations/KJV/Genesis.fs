@@ -1,13 +1,10 @@
 module Translations.KJV.Genesis
 
-open Elmish
-open Elmish.React
 open Fable.React
 open Fable.React.Props
 
 let gen1 =
-    [
-        h1 [] [ str "Genesis 1" ]
+    div [] [
         p [ Class "" ] [
             span [ Class "content is-small has-text-grey-light"] [ str "1" ]
             str "In the beginning God created the heaven and the earth. "
@@ -111,85 +108,92 @@ let gen1 =
     ]
 
 let gen2 =
-    [
-        h1 [] [ str "Genesis 2" ]
+    div [] [
         p [ Class "" ] [
             span [ Class "content is-small has-text-grey-light"] [ str "1" ]
-            str "Thus the heauens and the earth were finished, and all the hoste of them. "
+            str "Thus the heavens and the earth were finished, and all the host of them."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "2" ]
-            str " And on the seuenth day God ended his worke, which hee had made: And he rested on the seuenth day from all his worke, which he had made."
+            str "And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "3" ]
-            str "And God blessed the seuenth day, and sanctified it: because that in it he had rested from all his worke, which God created and made. "
+            str "And God blessed the seventh day, and sanctified it: because that in it he had rested from all his work which God created and made."
         ]
         p [ Class "" ] [
             span [ Class "content is-small has-text-grey-light"] [ str "4" ]
-            str "These are the generations of the heauens, & of the earth, when they were created; in the day that the LORD God made the earth, and the heauens, "
+            str "These are the generations of the heavens and of the earth when they were created, in the day that the LORD God made the earth and the heavens,"
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "5" ]
-            str "And euery plant of the field, before it was in the earth, and euery herbe of the field, before it grew: for the LORD God had not caused it to raine vpon the earth, and there was not a man to till the ground. "
+            str "And every plant of the field before it was in the earth, and every herb of the field before it grew: for the LORD God had not caused it to rain upon the earth, and there was not a man to till the ground."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "6" ]
-            str "But there went vp a mist from the earth, and watered the whole face of the ground. "
+            str "But there went up a mist from the earth, and watered the whole face of the ground."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "7" ]
-            str "And the LORD God formed man of the dust of the ground, & breathed into his nostrils the breath of life; and man became a liuing soule. "
+            str "And the LORD God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul. "
         ]
         p [ Class "" ] [
             span [ Class "content is-small has-text-grey-light"] [ str "8" ]
-            str "And the LORD God planted a garden Eastward in Eden; and there he put the man whom he had formed. "
+            str "And the LORD God planted a garden eastward in Eden; and there he put the man whom he had formed."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "9" ]
-            str "And out of the ground made the LORD God to grow euery tree that is pleasant to the sight, and good for food: the tree of life also in the midst of the garden, and the tree of knowledge of good and euill. "
+            str "And out of the ground made the LORD God to grow every tree that is pleasant to the sight, and good for food; the tree of life also in the midst of the garden, and the tree of knowledge of good and evil."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "10" ]
-            str "And a riuer went out of Eden to water the garden, and from thence it was parted, and became into foure heads. "
+            str "And a river went out of Eden to water the garden; and from thence it was parted, and became into four heads."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "11" ]
-            str "The name of the first is Pison: that is it which compasseth the whole land of Hauilah, where there is gold. "
+            str "The name of the first is Pison: that is it which compasseth the whole land of Havilah, where there is gold;"
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "12" ]
-            str "And the gold of that land is good: There is Bdellium and the Onix stone. "
+            str "And the gold of that land is good: there is bdellium and the onyx stone."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "13" ]
-            str "And the name of the second riuer is Gihon: the same is it that compasseth the whole land of Ethiopia. "
+            str "And the name of the second river is Gihon: the same is it that compasseth the whole land of Ethiopia."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "14" ]
-            str "And the name of the third riuer is Hiddekel: that is it which goeth toward the East of Assyria: and the fourth riuer is Euphrates. "
+            str "And the name of the third river is Hiddekel: that is it which goeth toward the east of Assyria. And the fourth river is Euphrates."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "15" ]
-            str "And the LORD God tooke the man, and put him into the garden of Eden, to dresse it, and to keepe it. "
+            str "And the LORD God took the man, and put him into the garden of Eden to dress it and to keep it."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "16" ]
-            str "And the LORD God commanded the man, saying, Of euery tree of the garden thou mayest freely eate. "
+            str "And the LORD God commanded the man, saying, Of every tree of the garden thou mayest freely eat:"
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "17" ]
-            str "But of the tree of the knowledge of good and euill, thou shalt not eate of it: for in the day that thou eatest thereof, thou shalt surely die. "
+            str "But of the tree of the knowledge of good and evil, thou shalt not eat of it: for in the day that thou eatest thereof thou shalt surely die."
         ]
         p [ Class "" ] [
             span [ Class "content is-small has-text-grey-light"] [ str "18" ]
-            str "And the LORD God said, It is not good that the man should be alone: I will make him an helpe meet for him. "
+            str "And the LORD God said, It is not good that the man should be alone; I will make him an help meet for him."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "19" ]
-            str "And out of þe ground the LORD God formed euery beast of the field, and euery foule of the aire, and brought them vnto Adam, to see what he would call them: and whatsoeuer Adam called euery liuing creature, that was the name thereof. "
+            str "And out of the ground the LORD God formed every beast of the field, and every fowl of the air; and brought them unto Adam to see what he would call them: and whatsoever Adam called every living creature, that was the name thereof."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "20" ]
-            str "And Adam gaue names to all cattell, and to the foule of the aire, and to euery beast of the fielde: but for Adam there was not found an helpe meete for him. "
+            str "And Adam gave names to all cattle, and to the fowl of the air, and to every beast of the field; but for Adam there was not found an help meet for him."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "21" ]
-            str "And the LORD God caused a deepe sleepe to fall vpon Adam, and hee slept; and he tooke one of his ribs, and closed vp the flesh in stead thereof. "
+            str "And the LORD God caused a deep sleep to fall upon Adam, and he slept: and he took one of his ribs, and closed up the flesh instead thereof;"
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "22" ]
-            str "And the rib which the LORD God had taken from man, made hee a woman, & brought her vnto the man. "
+            str "And the rib, which the LORD God had taken from man, made he a woman, and brought her unto the man."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "23" ]
-            str "And Adam said, This is now bone of my bones, and flesh of my flesh: she shalbe called woman, because shee was taken out of man. "
+            str "And Adam said, This is now bone of my bones, and flesh of my flesh: she shall be called Woman, because she was taken out of Man."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "24" ]
-            str "Therefore shall a man leaue his father and his mother, and shall cleaue vnto his wife: and they shalbe one flesh. "
+            str "Therefore shall a man leave his father and his mother, and shall cleave unto his wife: and they shall be one flesh."
             br []
             span [ Class "content is-small has-text-grey-light"] [ str "25" ]
-            str "And they were both naked, the man & his wife, and were not ashamed. "
+            str "And they were both naked, the man and his wife, and were not ashamed."
         ]
+    ]
+
+let genesis chapter =
+    div [] [
+        match chapter with
+        | 1 -> gen1
+        | 2 -> gen2
+        | _ -> div [] []
     ]
