@@ -1,35 +1,23 @@
-# Fable Minimal App
+# Who Touched My bible
 
-This is a simple Fable app including an [Elmish](https://elmish.github.io/) counter with as little configuration as possible. If you want to see a more complex app including commonly used F# tools like Paket or Fake, check [the Fulma demo](https://github.com/MangelMaxime/fulma-demo).
+This is a home project I am working on for my own personal interest.
 
-## Requirements
+## Things coming up
 
-* [dotnet SDK](https://www.microsoft.com/net/download/core) 2.1 or higher
-* [node.js](https://nodejs.org) with [npm](https://www.npmjs.com/)
-* An F# editor like Visual Studio, Visual Studio Code with [Ionide](http://ionide.io/) or [JetBrains Rider](https://www.jetbrains.com/rider/).
+* Adding all of the KJV and KJV 1611 translations
+* Requesting permission from some major translations with copyright
+* Adding different lenses to view scripture through. These include cross-references, translation history, cultural context, design patterns, etc.
+* Search by verses
+* Individual word context
 
-## Building and running the app
+## Coding
 
-* Install JS dependencies: `npm install`
-* Start Webpack dev server: `npx webpack-dev-server` or `npm start`
-* After the first compilation is finished, in your browser open: http://localhost:8080/
+I'm using f#, fable elmish, and various open source tools. I still need to do some optimization of the build structure, but for now it works.
 
-Any modification you do to the F# code will be reflected in the web page after saving.
+## The Name
 
-## Project structure
+The name comes from a few questions.
 
-### npm
-
-JS dependencies are declared in `package.json`, while `package-lock.json` is a lock file automatically generated.
-
-### Webpack
-
-[Webpack](https://webpack.js.org) is a JS bundler with extensions, like a static dev server that enables hot reloading on code changes. Fable interacts with Webpack through the `fable-loader`. Configuration for Webpack is defined in the `webpack.config.js` file. Note this sample only includes basic Webpack configuration for development mode, if you want to see a more comprehensive configuration check the [Fable webpack-config-template](https://github.com/fable-compiler/webpack-config-template/blob/master/webpack.config.js).
-
-### F#
-
-The sample only contains two F# files: the project (.fsproj) and a source file (.fs) in the `src` folder.
-
-### Web assets
-
-The `index.html` file and other assets like an icon can be found in the `public` folder.
+* "Who all touched this translation thorughout history?"
+* "My bible isn't where I left it. Who moved my bible?!"
+* "What should I name this thing? Naming things is hard. "
