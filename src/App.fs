@@ -29,25 +29,25 @@ let init() : Model =
     }
 
 let update (msg:Msg) (model:Model) =
-    match msg with
-    | NightTog bool ->
-        {model with NightMode = bool; MenuTog = false}
-    | MenuToggle bool ->
+    match model, msg with
+    | _, MenuToggle bool ->
         {model with MenuTog = bool}
-    | CloseLenses ->
+    | _, NightTog bool ->
+        {model with NightMode = bool; MenuTog = false}
+    | _, CloseLenses ->
         {model with LensOpt = None}
-    | Lens lens ->
+    | _, Lens lens ->
         {model with MenuTog = false; LensOpt = Some lens}
-    | ChangeTranslation translation ->
-        {model with Translation = translation}
-    | ChangeBook book ->
+    | _, ChangeTranslation translation ->
+        {model with Translation = translation; MenuTog = false}
+    | _, ChangeBook book ->
         {model with Book = book}
-    | ChangeChapter chapter ->
+    | _, ChangeChapter chapter ->
         {model with Chapter = chapter}
-    | NextChapter ->
-        model
-    | PreviousChapter ->
-        model
+    | _, NextChapter chapter ->
+        {model with Chapter = (chapter + 1)}
+    | _, PreviousChapter chapter ->
+        {model with Chapter = (chapter - 1)}
 
 let addressMenu model dispatch =
     div [] [
@@ -122,7 +122,7 @@ let addressMenu model dispatch =
                         div [ Class "dropdown-trigger" ] [
                             div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
                                 span [] [
-                                    span [ Class "title is-1" ] [ str (sprintf "%A" model.Book) ]
+                                    span [ Class "title is-2" ] [ str (sprintf "%A" model.Book) ]
                                     span [ Class "icon has-text-grey-light" ] [
                                         i [ Class "fas fa-angle-down"; AriaHidden "true" ] []
                                     ]
@@ -188,8 +188,8 @@ let view (model:Model) dispatch =
         match bool with
         | true -> false
         | false -> true
-    div [ Class "" ] [
-        div [ Class "" ] [
+    div [Class "has-navbar-fixed-bottom"] [
+        div [] [
             nav [ Class "navbar mainColor"; Role "navigation"; AriaLabel "main navigation" ] [
                 div [ Class "navbar-brand" ] [
                     a [ Class "navbar-item" ] [
@@ -211,16 +211,15 @@ let view (model:Model) dispatch =
                                 span [] [ str "Translations" ]
                             ]
                             div [ Class "navbar-dropdown" ] [
-                                a [ Class "navbar-item"; OnClick (fun _-> dispatch (ChangeTranslation KJV1611)) ] [
-                                    span [] [
-                                        str "KJV 1611"
-                                    ]
-                                ]
-                                a [ Class "navbar-item"; OnClick (fun _-> dispatch (ChangeTranslation KJV)) ] [
-                                    span [] [
-                                        str "KJV"
-                                    ]
-                                ]
+                                (match model.Translation with
+                                | KJV1611 -> a [ Class "navbar-item has-background-primary"; OnClick (fun _-> dispatch (ChangeTranslation KJV1611)) ] [ span [] [ str "KJV 1611" ] ]
+                                | _ -> a [ Class "navbar-item"; OnClick (fun _-> dispatch (ChangeTranslation KJV1611)) ] [ span [] [ str "KJV 1611" ] ]
+                                )
+                                (match model.Translation with
+                                | KJV -> a [ Class "navbar-item has-background-primary"; OnClick (fun _-> dispatch (ChangeTranslation KJV)) ] [ span [] [ str "KJV" ] ]
+                                | _ -> a [ Class "navbar-item"; OnClick (fun _-> dispatch (ChangeTranslation KJV)) ] [ span [] [ str "KJV" ] ]
+                                )
+
                             ]
                         ]
                         div [ Class "navbar-item has-dropdown is-hoverable" ] [
@@ -261,19 +260,34 @@ let view (model:Model) dispatch =
         div [ Class ("container is-fluid" + if model.NightMode = true then " nightMode" else "") ] [br []]
         div [ Class ("container is-fluid" + if model.NightMode = true then " nightMode" else "") ] [
             div [ Class "container" ] [
-                div [ Class "" ] [
+                div [] [
                     div [ Class "tile is-ancestor" ] [
                         div [ Class ( "tile is-vertical " + if model.LensOpt = None then "is-12" else "is-6") ] [
                             div [ Class "content is-medium"] [
                                 addressMenu model dispatch
+                                br []
                                 (match model.Translation with
                                     | KJV1611 -> KJV1611.TableOfContents.books model.Book model.Chapter
                                     | KJV -> KJV.TableOfContents.books model.Book model.Chapter
                                 )
-                            ]
-                            div [ Class "icon is-small has-text-grey-light"] [
-                                str "Next Chapter"
-                                i [ Class "fas fa-chevron-right" ] []
+                                br []
+                                div [ Class "navbar is-fixed-bottom is-mobile is-transparent nightMode" ] [
+                                    span [ Class "navbar-end" ] [
+                                        div [ Class "navbar-item" ] [
+                                            span [ Class "buttons is-centered" ] [
+                                                button [ Class "button is-small is-primary"; OnClick (fun _-> dispatch (PreviousChapter model.Chapter)); (if model.Chapter > 1 then Disabled false else Disabled true) ] [
+                                                    span [ Class "icon is-small has-text-grey-light" ] [i [ Class "fas fa-chevron-left" ] []]
+                                                    span [] [str "Previous Chapter" ]
+                                                ]
+                                                button [ Class "button is-right is-small is-primary"; OnClick (fun _-> dispatch (NextChapter model.Chapter)) ] [
+                                                    span [] [str "Next Chapter" ]
+                                                    span [ Class "icon is-small has-text-grey-light" ] [i [ Class "fas fa-chevron-right" ] []]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                                br []
                             ]
                         ]
                         (match model.LensOpt with

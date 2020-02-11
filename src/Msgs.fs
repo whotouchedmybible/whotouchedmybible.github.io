@@ -9,5 +9,5 @@ type Msg =
     | ChangeTranslation of Translation
     | ChangeBook of Book
     | ChangeChapter of int
-    | NextChapter
-    | PreviousChapter
+    | NextChapter of int
+    | PreviousChapter of int
