@@ -263,13 +263,15 @@ let view (model:Model) dispatch =
                 div [] [
                     div [ Class "tile is-ancestor" ] [
                         div [ Class ( "tile is-vertical " + if model.LensOpt = None then "is-12" else "is-6") ] [
-                            div [ Class "content is-medium"] [
+                            div [ Class "content is-medium" ] [
                                 addressMenu model dispatch
                                 br []
-                                (match model.Translation with
-                                    | KJV1611 -> KJV1611.TableOfContents.books model.Book model.Chapter
-                                    | KJV -> KJV.TableOfContents.books model.Book model.Chapter
-                                )
+                                div [ OnTouchMove (fun _-> dispatch (NightTog (boolOpposite model.NightMode))) ] [
+                                    (match model.Translation with
+                                        | KJV1611 -> KJV1611.TableOfContents.books model.Book model.Chapter
+                                        | KJV -> KJV.TableOfContents.books model.Book model.Chapter
+                                    )
+                                ]
                                 br []
                                 div [ Class "navbar is-fixed-bottom is-mobile is-transparent nightMode" ] [
                                     span [ Class "navbar-end" ] [
