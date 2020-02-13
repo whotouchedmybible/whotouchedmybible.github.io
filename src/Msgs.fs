@@ -6,6 +6,8 @@ type Msg =
     | MenuToggle of bool
     | CloseLenses
     | Lens of Lenses
+    | TouchStartX of float
+    | TouchEndX of float
     | ChangeTranslation of Translation
     | ChangeBook of Book
     | ChangeChapter of int

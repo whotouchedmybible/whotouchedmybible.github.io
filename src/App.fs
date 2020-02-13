@@ -5,12 +5,17 @@ open Elmish.React
 open Fable.React
 open Fable.React.Props
 open Translations
+open Browser
+open Fable.Import
 
 type Model =
     {
         NightMode: bool
         MenuTog: bool
         LensOpt: Lenses option
+        PendingX: float
+        StartX: float
+        EndX: float
         Translation: Translation
         Book: Book
         Chapter: int
@@ -22,6 +27,9 @@ let init() : Model =
         NightMode = true
         MenuTog = false
         LensOpt = None
+        PendingX = 0.0
+        StartX = 0.0
+        EndX = 0.0
         Translation = KJV1611
         Book = Genesis
         Chapter = 1
@@ -38,6 +46,10 @@ let update (msg:Msg) (model:Model) =
         {model with LensOpt = None}
     | _, Lens lens ->
         {model with MenuTog = false; LensOpt = Some lens}
+    | _, TouchStartX pendingX ->
+        {model with PendingX = pendingX}
+    | _, TouchEndX newX ->
+        {model with StartX = model.PendingX ; EndX = newX}
     | _, ChangeTranslation translation ->
         {model with Translation = translation; MenuTog = false}
     | _, ChangeBook book ->
@@ -45,9 +57,9 @@ let update (msg:Msg) (model:Model) =
     | _, ChangeChapter chapter ->
         {model with Chapter = chapter}
     | _, NextChapter chapter ->
-        {model with Chapter = (chapter + 1)}
+        {model with Chapter = (chapter + 1); StartX = 0.0; EndX = 0.0}
     | _, PreviousChapter chapter ->
-        {model with Chapter = (chapter - 1)}
+        {model with Chapter = (chapter - 1); StartX = 0.0; EndX = 0.0}
 
 let addressMenu model dispatch =
     div [] [
@@ -266,7 +278,16 @@ let view (model:Model) dispatch =
                             div [ Class "content is-medium" ] [
                                 addressMenu model dispatch
                                 br []
-                                div [ OnTouchMove (fun _-> dispatch (NightTog (boolOpposite model.NightMode))) ] [
+                                div [
+                                    OnTouchStart (fun e -> dispatch (TouchStartX e.AT_TARGET))
+                                    OnTouchEnd (fun e -> dispatch (TouchEndX e.AT_TARGET ))
+                                    if model.StartX > model.EndX
+                                        then (dispatch (NextChapter model.Chapter))
+                                        else ()
+                                    if model.StartX < model.EndX
+                                        then (dispatch (PreviousChapter model.Chapter))
+                                        else ()
+                                ] [
                                     (match model.Translation with
                                         | KJV1611 -> KJV1611.TableOfContents.books model.Book model.Chapter
                                         | KJV -> KJV.TableOfContents.books model.Book model.Chapter
