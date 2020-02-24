@@ -7,6 +7,8 @@ open Fable.React.Props
 open Translations
 open Browser
 open Fable.Import
+open Fable.Core
+open System
 
 type Model =
     {
@@ -14,54 +16,97 @@ type Model =
         MenuTog: bool
         LensOpt: Lenses option
         PendingX: float
-        StartX: float
-        EndX: float
+        StartX: int
+        StartY: int
+        EndX: int
+        EndY: int
         Translation: Translation
-        Book: Book
+        Book: BookOrderMax
         Chapter: int
         Verses: int list
     }
 
-let init() : Model =
+let init something =
     {
         NightMode = true
         MenuTog = false
         LensOpt = None
         PendingX = 0.0
-        StartX = 0.0
-        EndX = 0.0
+        StartX = 0
+        StartY = 0
+        EndX = 0
+        EndY = 0
         Translation = KJV1611
-        Book = Genesis
+        Book = GenOrderMax
         Chapter = 1
         Verses = []
-    }
+    }, []
 
 let update (msg:Msg) (model:Model) =
+    let swipe =
+        //if model.StartX > model.EndX
+        //    then Passthru (NextChapter model.Chapter)
+        //    else
+        //        if model.StartX < model.EndX
+        //            then Passthru (PreviousChapter model.Chapter)
+        //            else DoNothing
+        if model.StartX > model.EndX
+        then
+            if (model.StartX - model.EndX) > 125
+            then
+                if (model.StartY - model.EndY) < 20
+                then Passthru (NextChapter model.Chapter)
+                else DoNothing
+            else DoNothing
+        else
+            if (model.EndX - model.StartX) > 125
+            then
+                if (model.StartY - model.EndY) < 20
+                then Passthru (PreviousChapter model.Chapter)
+                else DoNothing
+            else DoNothing
+
     match model, msg with
     | _, MenuToggle bool ->
-        {model with MenuTog = bool}
+        {model with MenuTog = bool}, []
     | _, NightTog bool ->
-        {model with NightMode = bool; MenuTog = false}
+        {model with NightMode = bool; MenuTog = false}, []
     | _, CloseLenses ->
-        {model with LensOpt = None}
+        {model with LensOpt = None}, []
     | _, Lens lens ->
-        {model with MenuTog = false; LensOpt = Some lens}
-    | _, TouchStartX pendingX ->
-        {model with PendingX = pendingX}
-    | _, TouchEndX newX ->
-        {model with StartX = model.PendingX ; EndX = newX}
+        {model with MenuTog = false; LensOpt = Some lens}, []
+    | _, TouchStartX touchCord ->
+        {model with StartX = int(touchCord.clientX); StartY = int(touchCord.clientY)}, []
+    | _, TouchEndX touchCord ->
+        {model with EndX = int(touchCord.clientX); EndY = int(touchCord.clientY)}, [Passthru Swipe]
+    | _, Swipe ->
+        model, [swipe]
     | _, ChangeTranslation translation ->
-        {model with Translation = translation; MenuTog = false}
+        {model with Translation = translation; MenuTog = false}, []
     | _, ChangeBook book ->
-        {model with Book = book}
+        {model with Book = book; Chapter = 1}, []
     | _, ChangeChapter chapter ->
-        {model with Chapter = chapter}
+        {model with Chapter = chapter}, []
     | _, NextChapter chapter ->
-        {model with Chapter = (chapter + 1); StartX = 0.0; EndX = 0.0}
+        let nextChapt =
+            if (chapter + 1) > model.Book.MaxChapters then chapter else (chapter + 1)
+        let whatBook = if model.Book.Order + 1 = 67 then model.Book else BibleOrderMax.[(model.Book.Order + 1)]
+        let nextBook =
+            if (chapter + 1) > model.Book.MaxChapters then Passthru (ChangeBook whatBook) else DoNothing
+        {model with Chapter = nextChapt; StartX = 0; StartY = 0; EndX = 0; EndY = 0}, [nextBook]
     | _, PreviousChapter chapter ->
-        {model with Chapter = (chapter - 1); StartX = 0.0; EndX = 0.0}
+        let prevChapt =
+            if (chapter - 1) = 0 then chapter else (chapter - 1)
+        let whatBook = if model.Book.Order - 1 = 0 then model.Book else BibleOrderMax.[(model.Book.Order - 1)]
+        let prevBook =
+            if (chapter - 1) = 0 then Passthru (ChangeBook whatBook) else DoNothing
+        {model with Chapter = prevChapt; StartX = 0; StartY = 0; EndX = 0; EndY = 0}, [prevBook]
 
 let addressMenu model dispatch =
+    let chapterDropDownItem x =
+        let ToString int =
+            sprintf "%i" int
+        a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter x)) ] [ str (ToString x) ]
     div [] [
         span [ Class "hide-mobile" ] [
             span [ Class "columns is-gapless" ] [
@@ -70,7 +115,7 @@ let addressMenu model dispatch =
                         div [ Class "dropdown-trigger" ] [
                             div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
                                 span [] [
-                                    span [ Class "title is-1" ] [ str (sprintf "%A" model.Book) ]
+                                    span [ Class "title is-1" ] [ str (sprintf "%A" model.Book.Title) ]
                                     span [ Class "icon has-text-grey-light" ] [
                                         i [ Class "fas fa-angle-down"; AriaHidden "true" ] []
                                     ]
@@ -79,8 +124,8 @@ let addressMenu model dispatch =
                         ]
                         div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
                             div [ Class "dropdown-content" ] [
-                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook Genesis)) ] [ str "Genesis" ]
-                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook Exodus)) ] [ str "Exodus" ]
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook GenOrderMax )) ] [ str "Genesis" ]
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook ExodOrderMax )) ] [ str "Exodus" ]
                             ]
                         ]
                     ]
@@ -98,10 +143,8 @@ let addressMenu model dispatch =
                             ]
                         ]
                         div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
-                            div [ Class "dropdown-content" ] [
-                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter 1)) ] [ str "1" ]
-                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter 2)) ] [ str "2" ]
-                            ]
+                            div [ Class "dropdown-content" ]
+                                (List.map (chapterDropDownItem) [1 .. model.Book.MaxChapters])
                         ]
                     ]
                 ]
@@ -134,7 +177,7 @@ let addressMenu model dispatch =
                         div [ Class "dropdown-trigger" ] [
                             div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
                                 span [] [
-                                    span [ Class "title is-2" ] [ str (sprintf "%A" model.Book) ]
+                                    span [ Class "title is-2" ] [ str (sprintf "%A" model.Book.Title) ]
                                     span [ Class "icon has-text-grey-light" ] [
                                         i [ Class "fas fa-angle-down"; AriaHidden "true" ] []
                                     ]
@@ -143,8 +186,8 @@ let addressMenu model dispatch =
                         ]
                         div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
                             div [ Class "dropdown-content" ] [
-                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook Genesis)) ] [ str "Genesis" ]
-                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook Exodus)) ] [ str "Exodus" ]
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook GenOrderMax)) ] [ str "Genesis" ]
+                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeBook ExodOrderMax)) ] [ str "Exodus" ]
                             ]
                         ]
                     ]
@@ -279,18 +322,14 @@ let view (model:Model) dispatch =
                                 addressMenu model dispatch
                                 br []
                                 div [
-                                    OnTouchStart (fun e -> dispatch (TouchStartX e.AT_TARGET))
-                                    OnTouchEnd (fun e -> dispatch (TouchEndX e.AT_TARGET ))
-                                    if model.StartX > model.EndX
-                                        then (dispatch (NextChapter model.Chapter))
-                                        else ()
-                                    if model.StartX < model.EndX
-                                        then (dispatch (PreviousChapter model.Chapter))
-                                        else ()
+                                    //OnMouseDown (fun e -> dispatch (TouchStartX e.clientX))
+                                    //OnMouseDown (fun e -> dispatch (TouchStartX e.clientX))
+                                    OnTouchStart (fun e -> dispatch (TouchStartX e.changedTouches.[0] ))
+                                    OnTouchEnd (fun e -> dispatch (TouchEndX e.changedTouches.[0] ))
                                 ] [
                                     (match model.Translation with
-                                        | KJV1611 -> KJV1611.TableOfContents.books model.Book model.Chapter
-                                        | KJV -> KJV.TableOfContents.books model.Book model.Chapter
+                                        | KJV1611 -> KJV1611.TableOfContents.books model.Book.Title model.Chapter
+                                        | KJV -> KJV.TableOfContents.books model.Book.Title model.Chapter
                                     )
                                 ]
                                 br []
@@ -418,8 +457,19 @@ let view (model:Model) dispatch =
         ]
     ]
 
+let perform model effect dispatch =
+    match effect with
+    | Passthru msg ->
+        dispatch msg
+    | DoNothing ->
+        ()
+
+let nUpdate msg model =
+    let (model, fx) = update msg model
+    (model, fx |> List.map (perform model))
+
 // App
-Program.mkSimple init update view
+Program.mkProgram init nUpdate view
 |> Program.withReactSynchronous "elmish-app"
 |> Program.withConsoleTrace
 |> Program.run

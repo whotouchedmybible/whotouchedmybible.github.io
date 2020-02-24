@@ -19,13 +19,48 @@ type Translation =
 | KJV1611
 | KJV
 
-type Book =
+type Title =
 | Genesis
 | Exodus
 
-type Address =
+type BookOrderMax =
     {
-        Book: Book
-        Chapter: int
-        Verses: int list
+        Title: Title
+        Order: int
+        MaxChapters: int
     }
+
+//type Address =
+//    {
+//        Book: Book
+//        Chapter: int
+//        Verses: int list
+//    }
+
+let NoneOrderMax =
+    {
+        Title = Genesis
+        Order = 0
+        MaxChapters = 50
+    }
+
+let GenOrderMax =
+    {
+        Title = Genesis
+        Order = 1
+        MaxChapters = 50
+    }
+
+let ExodOrderMax =
+    {
+        Title = Exodus
+        Order = 2
+        MaxChapters = 40
+    }
+
+let BibleOrderMax =
+    [|
+        NoneOrderMax
+        GenOrderMax
+        ExodOrderMax
+    |]
