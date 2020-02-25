@@ -52,16 +52,16 @@ let update (msg:Msg) (model:Model) =
         //            else DoNothing
         if model.StartX > model.EndX
         then
-            if (model.StartX - model.EndX) > 125
+            if (model.StartX - model.EndX) > 70
             then
-                if (model.StartY - model.EndY) < 20
+                if (model.StartY - model.EndY) < 30
                 then Passthru (NextChapter model.Chapter)
                 else DoNothing
             else DoNothing
         else
-            if (model.EndX - model.StartX) > 125
+            if (model.EndX - model.StartX) > 70
             then
-                if (model.StartY - model.EndY) < 20
+                if (model.StartY - model.EndY) < 30
                 then Passthru (PreviousChapter model.Chapter)
                 else DoNothing
             else DoNothing
@@ -106,7 +106,8 @@ let addressMenu model dispatch =
     let chapterDropDownItem x =
         let ToString int =
             sprintf "%i" int
-        a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter x)) ] [ str (ToString x) ]
+        span [ Class "tag"; OnClick (fun _-> dispatch (ChangeChapter x)) ] [ str (ToString x) ]
+
     div [] [
         span [ Class "hide-mobile" ] [
             span [ Class "columns is-gapless" ] [
@@ -143,13 +144,24 @@ let addressMenu model dispatch =
                             ]
                         ]
                         div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
-                            div [ Class "dropdown-content" ]
-                                (List.map (chapterDropDownItem) [1 .. model.Book.MaxChapters])
+                            div [ Class "dropdown-content" ] [
+                                div [ Class "tile is-parent" ] [
+                                    div [ Class "tile is-child" ] [
+                                        div [ Class  "content" ] [
+                                            div [ Class "columns" ] [
+                                                div [ Class "column is-full" ] [
+                                                    div [ Class "tags are-medium" ] (List.map (chapterDropDownItem) [1 .. model.Book.MaxChapters])
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
                         ]
                     ]
                 ]
                 span [ Class "column has-text-right has-text-bottom" ] [
-                    div [ Class "dropdown is-hoverable" ] [
+                    div [ Class "dropdown is-hoverable is-right" ] [
                         div [ Class "dropdown-trigger" ] [
                             div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
                                 span [] [
@@ -162,8 +174,34 @@ let addressMenu model dispatch =
                         ]
                         div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
                             div [ Class "dropdown-content" ] [
-                                a [ Class "dropdown-item" ] [ str "1" ]
-                                a [ Class "dropdown-item" ] [ str "2" ]
+                                div [ Class "columns" ] [
+                                    div [ Class "column is-1" ] [
+                                        a [ Class "dropdown-item" ] [ str "1" ]
+                                    ]
+                                    div [ Class "column is-1" ] [
+                                        a [ Class "dropdown-item" ] [ str "1" ]
+                                    ]
+                                    div [ Class "column is-1" ] [
+                                        a [ Class "dropdown-item" ] [ str "1" ]
+                                    ]
+                                    div [ Class "column is-1" ] [
+                                        a [ Class "dropdown-item" ] [ str "1" ]
+                                    ]
+                                    div [ Class "column is-1" ] [
+                                        a [ Class "dropdown-item" ] [ str "1" ]
+                                    ]
+                                    div [ Class "column is-1" ] [
+                                        a [ Class "dropdown-item" ] [ str "1" ]
+                                    ]
+                                    div [ Class "column is-1" ] [
+                                        a [ Class "dropdown-item" ] [ str "1" ]
+                                    ]
+                                    div [ Class "column is-1" ] [
+                                        a [ Class "dropdown-item" ] [ str "1" ]
+                                    ]
+                                ]
+                                //a [ Class "dropdown-item" ] [ str "1" ]
+                                //a [ Class "dropdown-item" ] [ str "2" ]
                             ]
                         ]
                     ]
@@ -208,14 +246,14 @@ let addressMenu model dispatch =
                         ]
                         div [ Class "dropdown-menu"; Id "dropdown-menu4"; Role "menu" ] [
                             div [ Class "dropdown-content" ] [
-                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter 1)) ] [ str "1" ]
-                                a [ Class "dropdown-item"; OnClick (fun _-> dispatch (ChangeChapter 2)) ] [ str "2" ]
+                                div [Class "tags are-medium"]
+                                    (List.map (chapterDropDownItem) [1 .. model.Book.MaxChapters])
                             ]
                         ]
                     ]
                 ]
                 div [ Class "column has-text-bottom" ] [
-                    div [ Class "dropdown is-hoverable" ] [
+                    div [ Class "dropdown is-hoverable is-right" ] [
                         div [ Class "dropdown-trigger" ] [
                             div [ Class ""; AriaHasPopup true; AriaControls "dropdown-menu4" ] [
                                 span [] [
