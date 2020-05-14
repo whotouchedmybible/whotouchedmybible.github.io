@@ -3,8 +3,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Fable.Core" Version="3.0.0" />
+    <PackageReference Include="Fable.Core" Version="3.1.5" />
     <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
+    <PackageReference Include="Fable.JsonProvider" Version="1.0.0" />
+    <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
+    <PackageReference Include="Fable.SimpleJson" Version="3.8.2" />
+    <PackageReference Include="FSharp.Data" Version="3.3.3" />
 	  <Compile Include="obj\Debug\netcoreapp3.1\App.AssemblyInfo.fs" />
 	  <Compile Include="obj\Debug\netstandard2.0\App.AssemblyInfo.fs" />
 	  <Compile Include="Types.fs" />
@@ -21,6 +25,73 @@
   <ItemGroup>
     <Content Include="obj\App.fsproj.nuget.dgspec.json" />
     <Content Include="obj\project.assets.json" />
+    <Content Include="Translations\KJV\KJV\1Chronicles.json" />
+    <Content Include="Translations\KJV\KJV\1Corinthians.json" />
+    <Content Include="Translations\KJV\KJV\1John.json" />
+    <Content Include="Translations\KJV\KJV\1Kings.json" />
+    <Content Include="Translations\KJV\KJV\1Peter.json" />
+    <Content Include="Translations\KJV\KJV\1Samuel.json" />
+    <Content Include="Translations\KJV\KJV\1Thessalonians.json" />
+    <Content Include="Translations\KJV\KJV\1Timothy.json" />
+    <Content Include="Translations\KJV\KJV\2Chronicles.json" />
+    <Content Include="Translations\KJV\KJV\2Corinthians.json" />
+    <Content Include="Translations\KJV\KJV\2John.json" />
+    <Content Include="Translations\KJV\KJV\2Kings.json" />
+    <Content Include="Translations\KJV\KJV\2Peter.json" />
+    <Content Include="Translations\KJV\KJV\2Samuel.json" />
+    <Content Include="Translations\KJV\KJV\2Thessalonians.json" />
+    <Content Include="Translations\KJV\KJV\2Timothy.json" />
+    <Content Include="Translations\KJV\KJV\3John.json" />
+    <Content Include="Translations\KJV\KJV\Acts.json" />
+    <Content Include="Translations\KJV\KJV\Amos.json" />
+    <Content Include="Translations\KJV\KJV\Books.json" />
+    <Content Include="Translations\KJV\KJV\Colossians.json" />
+    <Content Include="Translations\KJV\KJV\Daniel.json" />
+    <Content Include="Translations\KJV\KJV\Deuteronomy.json" />
+    <Content Include="Translations\KJV\KJV\Ecclesiastes.json" />
+    <Content Include="Translations\KJV\KJV\Ephesians.json" />
+    <Content Include="Translations\KJV\KJV\Esther.json" />
+    <Content Include="Translations\KJV\KJV\Exodus.json" />
+    <Content Include="Translations\KJV\KJV\Ezekiel.json" />
+    <Content Include="Translations\KJV\KJV\Ezra.json" />
+    <Content Include="Translations\KJV\KJV\Galatians.json" />
+    <Content Include="Translations\KJV\KJV\Genesis.json" />
+    <Content Include="Translations\KJV\KJV\Habakkuk.json" />
+    <Content Include="Translations\KJV\KJV\Haggai.json" />
+    <Content Include="Translations\KJV\KJV\Hebrews.json" />
+    <Content Include="Translations\KJV\KJV\Hosea.json" />
+    <Content Include="Translations\KJV\KJV\Isaiah.json" />
+    <Content Include="Translations\KJV\KJV\James.json" />
+    <Content Include="Translations\KJV\KJV\Jeremiah.json" />
+    <Content Include="Translations\KJV\KJV\Job.json" />
+    <Content Include="Translations\KJV\KJV\Joel.json" />
+    <Content Include="Translations\KJV\KJV\John.json" />
+    <Content Include="Translations\KJV\KJV\Jonah.json" />
+    <Content Include="Translations\KJV\KJV\Joshua.json" />
+    <Content Include="Translations\KJV\KJV\Jude.json" />
+    <Content Include="Translations\KJV\KJV\Judges.json" />
+    <Content Include="Translations\KJV\KJV\Lamentations.json" />
+    <Content Include="Translations\KJV\KJV\Leviticus.json" />
+    <Content Include="Translations\KJV\KJV\Luke.json" />
+    <Content Include="Translations\KJV\KJV\Malachi.json" />
+    <Content Include="Translations\KJV\KJV\Mark.json" />
+    <Content Include="Translations\KJV\KJV\Matthew.json" />
+    <Content Include="Translations\KJV\KJV\Micah.json" />
+    <Content Include="Translations\KJV\KJV\Nahum.json" />
+    <Content Include="Translations\KJV\KJV\Nehemiah.json" />
+    <Content Include="Translations\KJV\KJV\Numbers.json" />
+    <Content Include="Translations\KJV\KJV\Obadiah.json" />
+    <Content Include="Translations\KJV\KJV\Philemon.json" />
+    <Content Include="Translations\KJV\KJV\Philippians.json" />
+    <Content Include="Translations\KJV\KJV\Proverbs.json" />
+    <Content Include="Translations\KJV\KJV\Psalms.json" />
+    <Content Include="Translations\KJV\KJV\Revelation.json" />
+    <Content Include="Translations\KJV\KJV\Romans.json" />
+    <Content Include="Translations\KJV\KJV\Ruth.json" />
+    <Content Include="Translations\KJV\KJV\SongofSolomon.json" />
+    <Content Include="Translations\KJV\KJV\Titus.json" />
+    <Content Include="Translations\KJV\KJV\Zechariah.json" />
+    <Content Include="Translations\KJV\KJV\Zephaniah.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\netcoreapp3.1\" />
@@ -37,6 +108,7 @@
     <None Include="obj\Debug\netstandard2.0\App.AssemblyInfoInputs.cache" />
     <None Include="obj\Debug\netstandard2.0\App.assets.cache" />
     <None Include="obj\Debug\netstandard2.0\App.fsprojAssemblyReference.cache" />
+    <Compile Include="Test.fs" />
     <Compile Include="App.fs" />
   </ItemGroup>
 </Project>

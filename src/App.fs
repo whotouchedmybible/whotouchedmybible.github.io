@@ -1,5 +1,6 @@
 module App
 
+
 open Elmish
 open Elmish.React
 open Fable.React
@@ -9,6 +10,18 @@ open Browser
 open Fable.Import
 open Fable.Core
 open System
+
+let sample = @"{
+    ""book"" : ""Genesis"",
+    ""chapters"" : {
+        ""chapter"" : ""1"",
+        ""verses"" : {
+            ""verse"" : ""1"",
+            ""text"" : ""In the beginning God created the heaven and the earth."",
+        },
+    },
+}"
+//type ExodusKJVJson = JsonProvider<"../src/Translations/KJV/KJV/Exodus.json">
 
 type Model =
     {
@@ -359,9 +372,8 @@ let view (model:Model) dispatch =
                             div [ Class "content is-medium" ] [
                                 addressMenu model dispatch
                                 br []
+                                div [ Class "" ] [ Test.view ]
                                 div [
-                                    //OnMouseDown (fun e -> dispatch (TouchStartX e.clientX))
-                                    //OnMouseDown (fun e -> dispatch (TouchStartX e.clientX))
                                     OnTouchStart (fun e -> dispatch (TouchStartX e.changedTouches.[0] ))
                                     OnTouchEnd (fun e -> dispatch (TouchEndX e.changedTouches.[0] ))
                                 ] [
